@@ -2,10 +2,6 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-
-
-
-
 double time_diff(struct timeval st, struct timeval ed){
 
   double st_ms, ed_ms, diff;
