@@ -1,35 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 void main(int argc, char const *argv[]){
 
   int i;
   int j;
   char *p;
 
-  int matrix[][];
+  int n = strtol(argv[1], &p, 10);
 
-
-  // set row = to the width of the matrix
-  int row = strtol(argv[1], &p, 10);
-
-  // square matricies only, so col = row
-  int col = row;
-
-  //int matrix [malloc(row * sizeof(float))][malloc(col * sizeof(float))];
+  double *A = malloc(n * sizeof(float));
 
   // build the matrix
-  for(i = 0; i < row; i++){
-    for(j = 0; j < col; j++){
-      matrix[i][j] = 1;
+  for(i = 0; i < n; i++){
+    for(j = 0; j < n; j++){
+      A[i * n + j] = 1;
     }
   }
 
   // transpose the matrix
-  for(i = 0; i < row; i++){
-    for(j = 0; j < col; j++){
-      matrix[i][j] = 1;
+  for(i = 0; i < n; i++){
+    for(j = 0; j < n; j++){
+      A[i * n + j] = 2;
     }
   }
+
+  free(A);
 
 }
