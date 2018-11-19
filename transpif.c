@@ -10,6 +10,22 @@ long getTime(){
 	return currentTime.tv_sec * (int)1e6 + currentTime.tv_usec;
 }
 
+int powerOf2(int block_size){
+
+  if (block_size == 0){
+    return 0;
+  }
+  while (block_size != 1)
+  {
+      if (block_size % 2 != 0){
+        printf("%s\n", "Error, block size is not a power of 2.");
+        exit(0);
+       }
+      block_size = block_size/2;
+  }
+  return 0;
+}
+
 void main(int argc, char const *argv[]){
 
   long start, end;
@@ -21,6 +37,8 @@ void main(int argc, char const *argv[]){
   int row = strtol(argv[1], &p, 10);
   int col = strtol(argv[2], &p, 10);
   int block = strtol(argv[3], &p, 10);
+
+  powerOf2(block);
 
   int n = row + col;
 
@@ -52,6 +70,7 @@ void main(int argc, char const *argv[]){
 
   printf("\nTime: %.0lf microseconds", (end - start));
 
+  free(A);
   free(At);
 
 }
