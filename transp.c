@@ -2,28 +2,26 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-float time_diff(struct timeval st, struct timeval ed){
 
-  float st_ms, ed_ms, diff;
-
-  st_ms = (float)st.tv_sec*1000000 + (float)st.tv_usec;
-  ed_ms = (float)ed.tv_sec*1000000 + (float)ed.tv_usec;
-
-  diff = (float)ed_ms - (float)st_ms;
-
-  return diff;
+// gets time in seconds + microseconds
+long getTime(){
+	struct timeval currentTime;
+	gettimeofday(&currentTime, NULL);
+	return currentTime.tv_sec * (int)1e6 + currentTime.tv_usec;
 }
 
 void main(int argc, char const *argv[]){
 
-  struct timeval start, end;
+  long start, end;
 
   int i, j, row, col;
   char *p;
 
+  // take in args
   int n = strtol(argv[1], &p, 10);
   int block = strtol(argv[2], &p, 10);
 
+  // allocate for arrays
   float *A = malloc(block * sizeof(float));
   float *At = malloc(block * sizeof(float));
 
@@ -34,9 +32,11 @@ void main(int argc, char const *argv[]){
     }
   }
 
-  printf("%f\n", A[8]);
+  //printf("%f\n", A[8]);
 
   // Print the input matrix
+
+  /*
   printf("Input Matrix:\n");
 
   for(i = 0; i < n; i++){
@@ -47,10 +47,12 @@ void main(int argc, char const *argv[]){
   }
   printf("\n");
 
-  // Transpose the matrix
-  gettimeofday(&start, NULL);
+  */
 
   //printf("%f\n", A[8]);
+
+  // Transpose the matrix
+  start = getTime();
 
   for(i = 0; i < n; i += block){
     for(j = 0; j < n; j += block){
@@ -74,9 +76,11 @@ void main(int argc, char const *argv[]){
 
 */
 
-  gettimeofday(&end, NULL);
+  end = getTime();
 
   // Print the output matrix
+
+  /*
   printf("Output Matrix:\n");
 
   for(i = 0; i < n; i++){
@@ -86,7 +90,9 @@ void main(int argc, char const *argv[]){
     printf("\n");
   }
 
-  printf("\nTime: %.0lf microseconds", time_diff(start, end));
+  */
+
+  printf("\nTime: %.0lf microseconds", (end - start));
 
   free(At);
 
